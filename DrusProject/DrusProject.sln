@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCADAService", "SCADAService\SCADAService.csproj", "{B210780C-B62B-45B8-9950-6D3702D87BC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Contracts\Contracts.csproj", "{57E9B3D1-16BB-4B74-9777-12788432790E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B210780C-B62B-45B8-9950-6D3702D87BC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B210780C-B62B-45B8-9950-6D3702D87BC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B210780C-B62B-45B8-9950-6D3702D87BC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B210780C-B62B-45B8-9950-6D3702D87BC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57E9B3D1-16BB-4B74-9777-12788432790E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57E9B3D1-16BB-4B74-9777-12788432790E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57E9B3D1-16BB-4B74-9777-12788432790E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57E9B3D1-16BB-4B74-9777-12788432790E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

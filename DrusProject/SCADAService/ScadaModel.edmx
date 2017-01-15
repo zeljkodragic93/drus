@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ScadaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Meter">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Location_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MeterRead">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Meter_ID" Type="int" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Value" Type="float" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Meter__Location___1273C1CD">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="Meter" Type="Self.Meter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Meter">
+              <PropertyRef Name="Location_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MeterRead__Meter__1B0907CE">
+          <End Role="Meter" Type="Self.Meter" Multiplicity="1" />
+          <End Role="MeterRead" Type="Self.MeterRead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meter">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MeterRead">
+              <PropertyRef Name="Meter_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ScadaModelStoreContainer">
+          <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Meter" EntityType="Self.Meter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MeterRead" EntityType="Self.MeterRead" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Meter__Location___1273C1CD" Association="Self.FK__Meter__Location___1273C1CD">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Meter" EntitySet="Meter" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MeterRead__Meter__1B0907CE" Association="Self.FK__MeterRead__Meter__1B0907CE">
+            <End Role="Meter" EntitySet="Meter" />
+            <End Role="MeterRead" EntitySet="MeterRead" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ScadaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Meters" Relationship="Self.FK__Meter__Location___1273C1CD" FromRole="Location" ToRole="Meter" />
+        </EntityType>
+        <EntityType Name="Meter">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Location_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Location" Relationship="Self.FK__Meter__Location___1273C1CD" FromRole="Meter" ToRole="Location" />
+          <NavigationProperty Name="MeterReads" Relationship="Self.FK__MeterRead__Meter__1B0907CE" FromRole="Meter" ToRole="MeterRead" />
+        </EntityType>
+        <EntityType Name="MeterRead">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Meter_ID" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Meter" Relationship="Self.FK__MeterRead__Meter__1B0907CE" FromRole="MeterRead" ToRole="Meter" />
+        </EntityType>
+        <Association Name="FK__Meter__Location___1273C1CD">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="Meter" Type="Self.Meter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Meter">
+              <PropertyRef Name="Location_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MeterRead__Meter__1B0907CE">
+          <End Role="Meter" Type="Self.Meter" Multiplicity="1" />
+          <End Role="MeterRead" Type="Self.MeterRead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meter">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MeterRead">
+              <PropertyRef Name="Meter_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ScadaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Locations" EntityType="Self.Location" />
+          <EntitySet Name="Meters" EntityType="Self.Meter" />
+          <EntitySet Name="MeterReads" EntityType="Self.MeterRead" />
+          <AssociationSet Name="FK__Meter__Location___1273C1CD" Association="Self.FK__Meter__Location___1273C1CD">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="Meter" EntitySet="Meters" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MeterRead__Meter__1B0907CE" Association="Self.FK__MeterRead__Meter__1B0907CE">
+            <End Role="Meter" EntitySet="Meters" />
+            <End Role="MeterRead" EntitySet="MeterReads" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ScadaModelStoreContainer" CdmEntityContainer="ScadaEntities">
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="ScadaModel.Location">
+              <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Meters">
+            <EntityTypeMapping TypeName="ScadaModel.Meter">
+              <MappingFragment StoreEntitySet="Meter">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Location_ID" ColumnName="Location_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MeterReads">
+            <EntityTypeMapping TypeName="ScadaModel.MeterRead">
+              <MappingFragment StoreEntitySet="MeterRead">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Meter_ID" ColumnName="Meter_ID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
