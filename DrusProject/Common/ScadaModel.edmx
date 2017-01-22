@@ -17,6 +17,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Location_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="MeterRead">
@@ -27,8 +28,9 @@
           <Property Name="Meter_ID" Type="int" Nullable="false" />
           <Property Name="Type" Type="int" Nullable="false" />
           <Property Name="Value" Type="float" Nullable="false" />
+          <Property Name="Timestamp" Type="datetime" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Meter__Location___1273C1CD">
+        <Association Name="FK__Meter__Location___145C0A3F">
           <End Role="Location" Type="Self.Location" Multiplicity="1" />
           <End Role="Meter" Type="Self.Meter" Multiplicity="*" />
           <ReferentialConstraint>
@@ -40,7 +42,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__MeterRead__Meter__1B0907CE">
+        <Association Name="FK__MeterRead__Meter__239E4DCF">
+          <End Role="Meter" Type="Self.Meter" Multiplicity="1" />
+          <End Role="MeterRead" Type="Self.MeterRead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meter">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MeterRead">
+              <PropertyRef Name="Meter_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MeterRead__Meter__24927208">
           <End Role="Meter" Type="Self.Meter" Multiplicity="1" />
           <End Role="MeterRead" Type="Self.MeterRead" Multiplicity="*" />
           <ReferentialConstraint>
@@ -56,11 +70,15 @@
           <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Meter" EntityType="Self.Meter" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MeterRead" EntityType="Self.MeterRead" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Meter__Location___1273C1CD" Association="Self.FK__Meter__Location___1273C1CD">
+          <AssociationSet Name="FK__Meter__Location___145C0A3F" Association="Self.FK__Meter__Location___145C0A3F">
             <End Role="Location" EntitySet="Location" />
             <End Role="Meter" EntitySet="Meter" />
           </AssociationSet>
-          <AssociationSet Name="FK__MeterRead__Meter__1B0907CE" Association="Self.FK__MeterRead__Meter__1B0907CE">
+          <AssociationSet Name="FK__MeterRead__Meter__239E4DCF" Association="Self.FK__MeterRead__Meter__239E4DCF">
+            <End Role="Meter" EntitySet="Meter" />
+            <End Role="MeterRead" EntitySet="MeterRead" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MeterRead__Meter__24927208" Association="Self.FK__MeterRead__Meter__24927208">
             <End Role="Meter" EntitySet="Meter" />
             <End Role="MeterRead" EntitySet="MeterRead" />
           </AssociationSet>
@@ -76,16 +94,18 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Meters" Relationship="Self.FK__Meter__Location___1273C1CD" FromRole="Location" ToRole="Meter" />
+          <NavigationProperty Name="Meters" Relationship="Self.FK__Meter__Location___145C0A3F" FromRole="Location" ToRole="Meter" />
         </EntityType>
         <EntityType Name="Meter">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Location_ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Location" Relationship="Self.FK__Meter__Location___1273C1CD" FromRole="Meter" ToRole="Location" />
-          <NavigationProperty Name="MeterReads" Relationship="Self.FK__MeterRead__Meter__1B0907CE" FromRole="Meter" ToRole="MeterRead" />
+          <NavigationProperty Name="Location" Relationship="Self.FK__Meter__Location___145C0A3F" FromRole="Meter" ToRole="Location" />
+          <NavigationProperty Name="MeterReads" Relationship="Self.FK__MeterRead__Meter__239E4DCF" FromRole="Meter" ToRole="MeterRead" />
+          <NavigationProperty Name="MeterReads1" Relationship="Self.FK__MeterRead__Meter__24927208" FromRole="Meter" ToRole="MeterRead" />
         </EntityType>
         <EntityType Name="MeterRead">
           <Key>
@@ -95,9 +115,11 @@
           <Property Name="Meter_ID" Type="Int32" Nullable="false" />
           <Property Name="Type" Type="Int32" Nullable="false" />
           <Property Name="Value" Type="Double" Nullable="false" />
-          <NavigationProperty Name="Meter" Relationship="Self.FK__MeterRead__Meter__1B0907CE" FromRole="MeterRead" ToRole="Meter" />
+          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Meter" Relationship="Self.FK__MeterRead__Meter__239E4DCF" FromRole="MeterRead" ToRole="Meter" />
+          <NavigationProperty Name="Meter1" Relationship="Self.FK__MeterRead__Meter__24927208" FromRole="MeterRead" ToRole="Meter" />
         </EntityType>
-        <Association Name="FK__Meter__Location___1273C1CD">
+        <Association Name="FK__Meter__Location___145C0A3F">
           <End Role="Location" Type="Self.Location" Multiplicity="1" />
           <End Role="Meter" Type="Self.Meter" Multiplicity="*" />
           <ReferentialConstraint>
@@ -109,7 +131,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__MeterRead__Meter__1B0907CE">
+        <Association Name="FK__MeterRead__Meter__239E4DCF">
+          <End Role="Meter" Type="Self.Meter" Multiplicity="1" />
+          <End Role="MeterRead" Type="Self.MeterRead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meter">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MeterRead">
+              <PropertyRef Name="Meter_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MeterRead__Meter__24927208">
           <End Role="Meter" Type="Self.Meter" Multiplicity="1" />
           <End Role="MeterRead" Type="Self.MeterRead" Multiplicity="*" />
           <ReferentialConstraint>
@@ -125,11 +159,15 @@
           <EntitySet Name="Locations" EntityType="Self.Location" />
           <EntitySet Name="Meters" EntityType="Self.Meter" />
           <EntitySet Name="MeterReads" EntityType="Self.MeterRead" />
-          <AssociationSet Name="FK__Meter__Location___1273C1CD" Association="Self.FK__Meter__Location___1273C1CD">
+          <AssociationSet Name="FK__Meter__Location___145C0A3F" Association="Self.FK__Meter__Location___145C0A3F">
             <End Role="Location" EntitySet="Locations" />
             <End Role="Meter" EntitySet="Meters" />
           </AssociationSet>
-          <AssociationSet Name="FK__MeterRead__Meter__1B0907CE" Association="Self.FK__MeterRead__Meter__1B0907CE">
+          <AssociationSet Name="FK__MeterRead__Meter__239E4DCF" Association="Self.FK__MeterRead__Meter__239E4DCF">
+            <End Role="Meter" EntitySet="Meters" />
+            <End Role="MeterRead" EntitySet="MeterReads" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MeterRead__Meter__24927208" Association="Self.FK__MeterRead__Meter__24927208">
             <End Role="Meter" EntitySet="Meters" />
             <End Role="MeterRead" EntitySet="MeterReads" />
           </AssociationSet>
@@ -152,6 +190,7 @@
             <EntityTypeMapping TypeName="ScadaModel.Meter">
               <MappingFragment StoreEntitySet="Meter">
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Location_ID" ColumnName="Location_ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -163,6 +202,7 @@
                 <ScalarProperty Name="Meter_ID" ColumnName="Meter_ID" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

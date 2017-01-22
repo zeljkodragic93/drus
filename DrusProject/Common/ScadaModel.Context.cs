@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SCADAService
+namespace Common
 {
     using System;
     using System.Data.Entity;

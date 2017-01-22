@@ -7,13 +7,23 @@ using System.Threading.Tasks;
 
 namespace Contracts
 {
+
+    public enum MeterReadingType
+    {
+        Humidity = 0,
+        Temeprature
+    };
+
     [ServiceContract]
     public interface ISCADAService
     {
         [OperationContract]
-        void SendHumidity(float value, int meterID);
+        void SendHumidity(float value, string meterID, DateTime timestamp);
 
         [OperationContract]
-        void SendTemperature(float value, int meterID);
+        void SendTemperature(float value, string meterID, DateTime timestamp);
+
+        [OperationContract]
+        string InitializeClient(string locationName);
     }
 }

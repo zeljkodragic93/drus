@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SCADAService
+namespace Common
 {
     using System;
     using System.Collections.Generic;
@@ -18,7 +18,9 @@ namespace SCADAService
         public int Meter_ID { get; set; }
         public int Type { get; set; }
         public double Value { get; set; }
+        public System.DateTime Timestamp { get; set; }
     
         public virtual Meter Meter { get; set; }
+        public virtual Meter Meter1 { get; set; }
     }
 }

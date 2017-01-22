@@ -7,23 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SCADAService
+namespace Common
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Location
+    public partial class Meter
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Location()
+        public Meter()
         {
-            this.Meters = new HashSet<Meter>();
+            this.MeterReads = new HashSet<MeterRead>();
+            this.MeterReads1 = new HashSet<MeterRead>();
         }
     
         public int id { get; set; }
         public string Name { get; set; }
+        public int Location_ID { get; set; }
     
+        public virtual Location Location { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Meter> Meters { get; set; }
+        public virtual ICollection<MeterRead> MeterReads { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MeterRead> MeterReads1 { get; set; }
     }
 }
